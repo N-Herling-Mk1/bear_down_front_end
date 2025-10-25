@@ -1,0 +1,12 @@
+{
+  "name": "B.E.A.R. D.O.W.N. — Local WAV Connector",
+  "short_name": "BEAR DOWN",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    { "src": "assets/images/favicon.ico", "sizes": "48x48 64x64 96x96 128x128 256x256", "type": "image/x-icon" },
+    { "src": "assets/images/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

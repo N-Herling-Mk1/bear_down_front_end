@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>B.E.A.R. D.O.W.N. — Local WAV Connector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <img src="assets/images/logo.png" alt="BEAR DOWN" class="logo" />
+    <div class="title">
+      <h1>B.E.A.R. D.O.W.N.</h1>
+      <p>Connect to your local backend and stream WAV files</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="connect">
+      <label for="backend">Backend URL</label>
+      <input id="backend" type="text" placeholder="https://localhost:8443" />
+      <button id="btnConnect">Connect</button>
+      <span id="status" class="muted">Not connected</span>
+    </section>
+
+    <section id="info" class="info hidden">
+      <div><strong>Audio root:</strong> <span id="root"></span></div>
+      <div><strong>Files:</strong> <span id="count">0</span></div>
+    </section>
+
+    <section id="list" class="card hidden">
+      <table class="table" id="tbl">
+        <thead>
+          <tr><th>Name</th><th>Size</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="player" class="card hidden">
+      <div class="player-head">
+        <h3 id="nowPlaying" class="truncate">—</h3>
+        <a id="downloadLink" href="#" download>Download</a>
+      </div>
+      <audio id="audio" controls crossorigin="anonymous"></audio>
+    </section>
+  </main>
+
+  <footer class="muted small">
+    <p>
+      Tip: Because GitHub Pages is HTTPS, your local backend should also be HTTPS
+      (e.g., <code>https://localhost:8443</code>) to avoid mixed-content blocking.
+    </p>
+  </footer>
+
+  <template id="row-tpl">
+    <tr>
+      <td class="name"></td>
+      <td class="size"></td>
+      <td class="actions">
+        <button class="play">Play</button>
+      </td>
+    </tr>
+  </template>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
