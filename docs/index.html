@@ -5,13 +5,13 @@
   <title>B.E.A.R. D.O.W.N. — Local WAV Connector</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0f172a" />
-  <link rel="icon" href="assets/images/Bear_down_icon.ico" sizes="any" />
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="app-header">
-    <img src="assets/images/Bear_down_img.png" alt="BEAR DOWN" class="logo" />
+    <img src="assets/images/logo.png" alt="BEAR DOWN logo" class="logo" />
     <div class="title">
       <h1>B.E.A.R. D.O.W.N.</h1>
       <p>Connect to your local backend and stream WAV files</p>
@@ -19,54 +19,79 @@
   </header>
 
   <main class="container">
-    <section class="connect">
-      <label for="backend">Backend URL</label>
-      <input id="backend" type="text" placeholder="https://localhost:8443" />
-      <button id="btnConnect">Connect</button>
-      <span id="status" class="muted">Not connected</span>
+    <!-- Connect row -->
+    <section class="connect card">
+      <div class="connect-fields">
+        <label for="backend">Backend URL</label>
+        <input id="backend" type="text" placeholder="https://localhost:8443" autocomplete="off" />
+      </div>
+      <div class="connect-actions">
+        <button id="btnConnect" class="btn primary" aria-label="Connect to backend">Connect</button>
+        <span id="status" class="muted">Not connected</span>
+      </div>
     </section>
 
+    <!-- Playback prefs -->
+    <section class="prefs">
+      <div class="autoplay-row">
+        <label class="switch">
+          <input type="checkbox" id="autoPlayToggle" />
+          <span class="slider" aria-hidden="true"></span>
+        </label>
+        <label for="autoPlayToggle" class="auto-label">Auto play next</label>
+      </div>
+    </section>
+
+    <!-- Info -->
     <section id="info" class="info hidden">
       <div><strong>Audio root:</strong> <span id="root"></span></div>
       <div><strong>Files:</strong> <span id="count">0</span></div>
     </section>
 
+    <!-- File list -->
     <section id="list" class="card hidden">
-      <table class="table" id="tbl">
+      <table class="table" id="tbl" role="table" aria-label="Audio files">
         <thead>
-          <tr><th>Name</th><th>Size</th><th></th></tr>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col" class="col-size">Size</th>
+            <th scope="col" class="col-actions"></th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
 
+    <!-- Player -->
     <section id="player" class="card hidden">
       <div class="player-head">
-        <h3 id="nowPlaying" class="truncate">—</h3>
-        <a id="downloadLink" href="#" download>Download</a>
+        <h3 id="nowPlaying" class="truncate" title="Now playing">—</h3>
+        <a id="downloadLink" class="btn subtle" href="#" download aria-label="Download current track">Download</a>
       </div>
-      <audio id="audio" controls crossorigin="anonymous"></audio>
+      <audio id="audio" controls crossorigin="anonymous" aria-label="Audio player"></audio>
     </section>
   </main>
 
-  <footer class="muted small">
-    <p>
+  <footer class="footer">
+    <p class="muted small">
       Tip: Because GitHub Pages is HTTPS, your local backend should also be HTTPS
       (e.g., <code>https://localhost:8443</code>) to avoid mixed-content blocking.
     </p>
   </footer>
 
+  <!-- Row template -->
   <template id="row-tpl">
     <tr>
       <td class="name"></td>
-      <td class="size"></td>
-      <td class="actions">
-        <button class="play">Play</button>
+      <td class="size col-size"></td>
+      <td class="actions col-actions">
+        <button class="btn play" aria-label="Play this file">Play</button>
       </td>
     </tr>
   </template>
 
-  <div id="toast" class="toast hidden"></div>
+  <!-- Toast -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
